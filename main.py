@@ -20,7 +20,7 @@ class SessionFixer:
         new_filename = self.filename + "_fixed.txt"
         with open(os.path.join(self.file_dir, new_filename), mode="w", encoding="utf-8-sig") as writer:
             for line in self.text:
-                res = re.search('.*(?=&uri=)', line)
+                res = re.search(r"[^\s-].*(?=&uri=)", line)
                 if res:
                     line = self.fix_link(res, line)
                 writer.write(line)
@@ -28,7 +28,9 @@ class SessionFixer:
 
     @staticmethod
     def fix_link(match, text):
-        return text.replace(match[0], "")[5:]
+        text = text.replace(match[0], "")
+        text = text.replace("&uri=", "")
+        return text
 
 
 def args_parser():
