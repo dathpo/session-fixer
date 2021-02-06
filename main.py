@@ -29,8 +29,7 @@ class SessionFixer:
     @staticmethod
     def fix_link(match, text):
         text = text.replace(match[0], "")
-        text = text.replace("&uri=", "")
-        return text
+        return text.replace("&uri=", "")
 
 
 def args_parser():
@@ -42,9 +41,6 @@ def args_parser():
 
 
 def sigint_handler(sig, frame):
-    """
-    ISR to handle the Ctrl-C combination and stop the program in a clean way
-    """
     exit(2)
 
 
